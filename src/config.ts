@@ -1,3 +1,3 @@
 export const config = {
-    flickrAPIKey: 'df190dc2a5b8175b929b817b093ca0cb'
+    flickrAPIKey: '389d18e1bc0cb97e271191bf7ad618c0'
 }

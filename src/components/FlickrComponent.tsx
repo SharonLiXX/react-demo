@@ -13,13 +13,20 @@ export default class FlickrComponent extends React.Component<{}> {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.keyPress = this.keyPress.bind(this);
   }
 
   public handleChange(event: any) {
     const searchTerm = event.target.value;
     this.setState({ searchTerm });
+  }
 
-    if (searchTerm && searchTerm.length > 0) {
+  public keyPress(event: any) {
+    const {
+      searchTerm,
+    } = this.state as any;
+
+    if (event.key === 'Enter') {
       this.searchImages(searchTerm);
     }
   }
@@ -44,7 +51,7 @@ export default class FlickrComponent extends React.Component<{}> {
           Flickr Images Search
         </div>
         <div className="searchInput">
-          <input placeholder="Search…" onChange={this.handleChange} />
+          <input placeholder="Search…" onChange={this.handleChange} onKeyPress={this.keyPress}/>
         </div>
         <div className="images">
           {
