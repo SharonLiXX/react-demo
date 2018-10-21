@@ -1,15 +1,27 @@
 import * as React from "react";
-
 import "./FlickrComponent.css";
-
 import { config } from "../config";
+import { withStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
 
-export default class FlickrComponent extends React.Component<{}> {
+const styles = (theme: any) => ({
+  textField: {
+    width: 420,
+    flexWrap: 'wrap',
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    fontsize: "300px",
+  },
+});
+
+class FlickrComponent extends React.Component<{}> {
+  
   constructor(props: any) {
     super(props);
     this.state = {
-      searchTerm: "Kiwi",
+      searchTerm: "Auckland",
       images: [],
+      classes:[],
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -43,15 +55,27 @@ export default class FlickrComponent extends React.Component<{}> {
 
   public render() {
     const {
-      images,
+      images
     } = this.state as any;
+    
+    const {
+      classes
+    } = this.props as any;
+
     return (
       <div>
         <div className="title">
           Flickr Images Search
         </div>
         <div className="searchInput">
-          <input placeholder="Search…" onChange={this.handleChange} onKeyPress={this.keyPress}/>
+        <TextField
+          id="outlined-search"
+          label="search..."
+          variant="outlined"
+          className={classes.textField}
+          onChange={this.handleChange}
+          onKeyPress={this.keyPress}
+        />
         </div>
         <div className="images">
           {
@@ -96,3 +120,4 @@ export default class FlickrComponent extends React.Component<{}> {
     return `https://farm${obj.farm}.staticflickr.com/${obj.server}/${obj.id}_${obj.secret}_n.jpg`;
   }
 }
+export default withStyles(styles as any)(FlickrComponent);
